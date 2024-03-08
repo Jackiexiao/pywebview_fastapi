@@ -1,0 +1,5 @@
+pywebview==5.0.5
+typer[all]==0.9.0
+uvicorn==0.27.1
+fastapi==0.110.0
+pyinstaller==6.4.0

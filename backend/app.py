@@ -1,21 +1,17 @@
-import os 
-from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import JSONResponse
+from pathlib import Path
 
+from fastapi import FastAPI
+from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
+ROOT_PATH = Path(__file__).parent.parent
+public_file_abspath = ROOT_PATH / "public"
 
-ROOT_PATH = os.path.join(os.path.dirname(__file__), "..")
-public_file_abspath = os.path.join(ROOT_PATH, "public")
-
-app.mount("/", StaticFiles(directory=public_file_abspath), name="public")
+app.mount("/", StaticFiles(directory=str(public_file_abspath)), name="public")
 
 
 @app.get("/api")
 def index():
     return JSONResponse({"status": 200, "msg": "ok"})
-
-
-
